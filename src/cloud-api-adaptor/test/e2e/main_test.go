@@ -123,6 +123,10 @@ func TestMain(m *testing.M) {
 
 		// Get properties
 		props := provisioner.GetProperties(ctx, cfg)
+		if props["SECURE_COMMS"] == "true" {
+			testCase_secureComms_isActive = true
+			log.Info("Do setup secureComms is active")
+		}
 
 		// Set CONTAINER_RUNTIME env variable if present in the properties
 		// Default value is containerd.
