@@ -1,0 +1,51 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../yamls
+
+images:
+- name: cloud-api-adaptor
+  newName: quay.io/confidential-containers/cloud-api-adaptor
+  newTag: latest
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+- literals:
+  - CLOUD_PROVIDER="libvirt"
+  - ENABLE_CLOUD_PROVIDER_EXTERNAL_PLUGIN="false"
+  - CLOUD_CONFIG_VERIFY="false"
+  - LIBVIRT_URI="qemu+ssh://root@10.123.76.90/system?no_verify=1"
+  - LIBVIRT_NET="default"
+  - LIBVIRT_POOL="default"
+  - DISABLECVM="true"
+  - SECURE_COMMS="true"
+  - INITDATA=""
+  - LIBVIRT_VOL_NAME="podvm-base.qcow2"
+  name: peer-pods-cm
+  namespace: confidential-containers-system
+  #- LIBVIRT_LAUNCH_SECURITY="" #sev or s390-pv
+  #- LIBVIRT_FIRMWARE="" # Uncomment and set if you want to change the firmware path. Defaults to /usr/share/edk2/ovmf/OVMF_CODE.fd
+  #- LIBVIRT_VOL_NAME="" # Uncomment and set if you want to use a specific volume name. Defaults to podvm-base.qcow2
+  #- PAUSE_IMAGE="" # Uncomment and set if you want to use a specific pause image
+  #- VXLAN_PORT="" # Uncomment and set if you want to use a specific vxlan port. Defaults to 4789
+  #- PEERPODS_LIMIT_PER_NODE="10" # Max number of peer pods that can be created per node. Default is 10
+##TLS_SETTINGS
+  #- CACERT_FILE="/etc/certificates/ca.crt" # for TLS
+  #- CERT_FILE="/etc/certificates/client.crt" # for TLS
+  #- CERT_KEY="/etc/certificates/client.key" # for TLS
+  #- TLS_SKIP_VERIFY="" # for testing only
+##TLS_SETTINGS
+
+  #- auth.json # set - path to auth.json pull credentials file
+secretGenerator:
+- name: auth-json-secret
+  namespace: confidential-containers-system
+- files:
+  - id_rsa
+  name: ssh-key-secret
+  namespace: confidential-containers-system
+- name: peer-pods-secret
+  namespace: confidential-containers-system
