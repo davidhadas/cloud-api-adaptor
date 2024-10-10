@@ -113,7 +113,7 @@ jobs:
           test/utils/checkout_kbs.sh
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+          
       - name: Checkout Trustee Operator Repository
         run: |
           test/utils/checkout_trustee_operator.sh
