@@ -1,14 +1,6 @@
 {
-<<<<<<< HEAD
     "secure_comms": ["none"],
     "os": ["ubuntu"],
     "provider": ["generic"],
     "arch": ["amd64"]
 }
-=======
-    "securecomms": ["none", "withoutKbs"],
-    "os": ["ubuntu"],
-    "provider": ["generic"],
-    "arch": ["amd64"]
-}
->>>>>>> bb349aa5 (Create e2e_matrix_libvirt.json)
