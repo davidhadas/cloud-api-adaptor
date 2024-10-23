@@ -114,6 +114,12 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Checkout Trustee Operator Repository
+        run: |
+          test/utils/checkout_trustee_operator.sh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: run tests
         id: runTests
         env:
@@ -122,6 +128,7 @@ jobs:
         run: |
           export CLOUD_PROVIDER=libvirt
           export DEPLOY_KBS=true
+          export DEPLOY_TRUSTEE_OPERATOR=true
           export TEST_PROVISION="yes"
           export TEST_TEARDOWN="no"
           export TEST_PROVISION_FILE="$PWD/libvirt.properties"
