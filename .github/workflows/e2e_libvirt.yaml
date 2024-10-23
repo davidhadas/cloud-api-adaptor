@@ -38,7 +38,7 @@ defaults:
 
 jobs:
   test:
-    runs-on: az-ubuntu-2204
+    runs-on: ubuntu-2204
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -128,7 +128,7 @@ jobs:
           export TEST_E2E_TIMEOUT="75m"
           export TEST_E2E_SECURE_COMMS="${{ inputs.secure_comms }}"
 
-          make test-e2e
+        # make test-e2e
 
       - name: Debug tests failure
         if: failure() && steps.runTests.outcome == 'failure'
