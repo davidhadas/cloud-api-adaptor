@@ -41,6 +41,9 @@ git:
   kbs:
     url: https://github.com/confidential-containers/trustee
     reference: f287fcd60b0b3ddbef5546d646669813b9e68f8d
+  trustee-operator:
+    url: https://github.com/confidential-containers/trustee-operator
+    reference: 9e4b0d15cfc53ad68248535d11d134a5c7ade5d9
 # If a tag is given it will attempt to pull the oci image by tag. if a
 # reference is specified the corresponding tag will be constructed using
 # the reference and suffixes like architecture or tee.
