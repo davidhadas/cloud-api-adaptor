@@ -13,7 +13,7 @@ on:
         required: true
         type: string
       git_ref:
-        default: 'test-action'
+        default: 'main'
         description: Git ref to checkout the cloud-api-adaptor repository. Defaults to main.
         required: false
         type: string
@@ -153,6 +153,7 @@ jobs:
       - name: Define Test Matrix
         id: matrix
         run: |
+          git checkout test-action
           pwd
           jq --version
           ls -l ./libvirt
