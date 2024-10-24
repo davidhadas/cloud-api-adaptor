@@ -50,6 +50,7 @@ jobs:
         if: github.event_name == 'pull_request_target'
         working-directory: ./
         run: |
+          git checkout test-action
           ./hack/ci-helper.sh rebase-atop-of-the-latest-target-branch
 
       - name: Read properties from versions.yaml
@@ -116,7 +117,6 @@ jobs:
           
       - name: Checkout Trustee Operator Repository
         run: |
-          git checkout test-action
           pwd
           ls -l test
           ls -l test/utils
