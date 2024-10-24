@@ -153,8 +153,8 @@ jobs:
       - name: Define Test Matrix
         id: matrix
         run: |
-          echo "matrix=$(jq -c . < src/cloud-api-adaptor/libvirt/e2e_matrix_libvirt.json)"
-          echo "matrix=$(jq -c . < src/cloud-api-adaptor/libvirt/e2e_matrix_libvirt.json)" >> "$GITHUB_OUTPUT"
+          echo "matrix=$(jq -c . < libvirt/e2e_matrix_libvirt.json)"
+          echo "matrix=$(jq -c . < libvirt/e2e_matrix_libvirt.json)" >> "$GITHUB_OUTPUT"
 
   # Run libvirt e2e tests if pull request labeled 'test_e2e_libvirt'
   test-pre-libvirt:
