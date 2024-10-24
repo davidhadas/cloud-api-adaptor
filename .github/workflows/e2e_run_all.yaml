@@ -153,7 +153,25 @@ jobs:
       - name: Define Test Matrix
         id: matrix
         run: |
+          echo "matrix=$(jq -c . < src/cloud-api-adaptor/libvirt/e2e_matrix_libvirt.json)"
           echo "matrix=$(jq -c . < src/cloud-api-adaptor/libvirt/e2e_matrix_libvirt.json)" >> "$GITHUB_OUTPUT"
+
+  # Run libvirt e2e tests if pull request labeled 'test_e2e_libvirt'
+  test-pre-libvirt:
+    name: test-pre-libvirt
+    if: |
+      github.event_name == 'schedule' ||
+      github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'push' ||
+      contains(github.event.pull_request.labels.*.name, 'test_e2e_libvirt')
+    needs: [podvm, image, prep_install]
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo matrix
+        run: |
+          echo "fromJSON(needs.prep_install.outputs.matrix)"
+          echo ${{ fromJSON(needs.prep_install.outputs.matrix) }}
+
 
   # Run libvirt e2e tests if pull request labeled 'test_e2e_libvirt'
   libvirt:
