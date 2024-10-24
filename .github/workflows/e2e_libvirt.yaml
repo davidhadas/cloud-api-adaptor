@@ -116,6 +116,10 @@ jobs:
           
       - name: Checkout Trustee Operator Repository
         run: |
+          git checkout test-action
+          pwd
+          ls -l test
+          ls -l test/utils
           test/utils/checkout_trustee_operator.sh
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
