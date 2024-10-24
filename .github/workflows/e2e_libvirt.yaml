@@ -46,11 +46,15 @@ jobs:
           fetch-depth: 0
           ref: ${{ inputs.git_ref }}
 
+      - name: Checkout test-Action
+        working-directory: ./
+        run: |
+          git checkout test-action
+
       - name: Rebase the code
         if: github.event_name == 'pull_request_target'
         working-directory: ./
         run: |
-          git checkout test-action
           ./hack/ci-helper.sh rebase-atop-of-the-latest-target-branch
 
       - name: Read properties from versions.yaml
