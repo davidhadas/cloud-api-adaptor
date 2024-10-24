@@ -13,7 +13,7 @@ on:
         required: true
         type: string
       git_ref:
-        default: 'main'
+        default: 'test-action'
         description: Git ref to checkout the cloud-api-adaptor repository. Defaults to main.
         required: false
         type: string
@@ -158,11 +158,6 @@ jobs:
           ls -l ./libvirt
           cat ./libvirt/e2e_matrix_libvirt.json
           jq -c . < ./libvirt/e2e_matrix_libvirt.json
-          ls -l ./src
-          ls -l ./src/cloud-api-adaptor
-          ls -l ./src/cloud-api-adaptor/libvirt
-          cat ./src/cloud-api-adaptor/libvirt/e2e_matrix_libvirt.json
-          jq -c . < ./src/cloud-api-adaptor/libvirt/e2e_matrix_libvirt.json
           echo "matrix=$(jq -c . < ./libvirt/e2e_matrix_libvirt.json)"
           echo "matrix=$(jq -c . < ./libvirt/e2e_matrix_libvirt.json)" >> "$GITHUB_OUTPUT"
 
